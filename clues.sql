@@ -45,6 +45,15 @@ world-# WHERE region = 'Southern Europe' AND language = 'Italian' AND countries.
 -- Clue #5: Oh no, she pulled a switch – there are two cities with very similar names, but in totally different parts of the globe! She's headed to South America as we speak; go find a city whose name is like the one we were headed to, but doesn't end the same. Find out the city, and do another search for what country it's in. Hurry!
 
 -- Write SQL query here
+world=# SELECT countries.code, countries.name, countries.region, cities.name
+world-# FROM countries
+world-# JOIN cities
+world-# ON countries.code = cities.countrycode
+world-# WHERE region = 'South America' AND cities.name LIKE '%San Mar%';
+ code |   name    |    region     |        name
+------+-----------+---------------+---------------------
+ ARG  | Argentina | South America | General San Mart├¡n
+(1 row)
 
 
 -- Clue #6: We're close! Our South American agent says she just got a taxi at the airport, and is headed towards
