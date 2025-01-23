@@ -80,3 +80,9 @@ world=# SELECT district FROM cities WHERE name LIKE 'General San Mart%';
 
 
 -- We're counting on you, gumshoe. Find out where she's headed, send us the info, and we'll be sure to meet her at the gates with bells on.
+
+world=# SELECT * FROM cities WHERE population = 91084;
+  id  |     name     | countrycode |  district  | population
+------+--------------+-------------+------------+------------
+ 4060 | Santa Monica | USA         | California |      91084
+(1 row)
