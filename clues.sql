@@ -17,11 +17,29 @@ world=# SELECT countrycode, language FROM countrylanguages WHERE countrycode = '
 -- Clue #3: We have new news on the classes Carmen attended – our gumshoes tell us she's moved on to a different country, a country where people speak only the language she was learning. Find out which nearby country speaks nothing but that language.
 
 -- Write SQL query here
+world=# SELECT countries.code, countries.name, countries.region, countrylanguages.language
+world-# FROM countries JOIN countrylanguages
+world-# ON countries.code = countrylanguages.countrycode
+world-# WHERE region = 'Southern Europe' AND language = 'Italian';
+ ITA  | Italy                         | Southern Europe | Italian
+ SMR  | San Marino                    | Southern Europe | Italian
+ VAT  | Holy See (Vatican City State) | Southern Europe | Italian
 
 
 -- Clue #4: We're booking the first flight out – maybe we've actually got a chance to catch her this time. There are only two cities she could be flying to in the country. One is named the same as the country – that would be too obvious. We're following our gut on this one; find out what other city in that country she might be flying to.
 
 -- Write SQL query here
+world=# SELECT countries.code, countries.name, countries.region, countrylanguages.language
+world-# FROM countries
+world-# JOIN countrylanguages
+world-# ON countries.code = countrylanguages.countrycode
+world-# JOIN cities
+world-# ON countries.code = cities.countrycode
+world-# WHERE region = 'Southern Europe' AND language = 'Italian' AND countries.name = cities.name;
+ code |    name    |     region      | language
+------+------------+-----------------+----------
+ SMR  | San Marino | Southern Europe | Italian
+(1 row)
 
 
 -- Clue #5: Oh no, she pulled a switch – there are two cities with very similar names, but in totally different parts of the globe! She's headed to South America as we speak; go find a city whose name is like the one we were headed to, but doesn't end the same. Find out the city, and do another search for what country it's in. Hurry!
